@@ -1,5 +1,6 @@
 require "./lib/photograph"
 require "./lib/artist"
+require "CSV"
 require 'pry'
 
 class Curator
@@ -72,4 +73,21 @@ class Curator
     end
     wanted_photos.flatten
   end
+
+  def load_photographs(filepath)
+    CSV.foreach(filepath, headers: true, header_converters: :symbol) do |params|
+      @photographs << Photograph.new(params)
+    end
+  end
+
+  def load_artists(filepath)
+    CSV.foreach(filepath, headers: true, header_converters: :symbol) do |params|
+      @artists << Artist.new(params)
+    end
+  end
+
+
+
+
+
 end

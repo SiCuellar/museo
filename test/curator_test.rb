@@ -3,6 +3,7 @@ require "minitest/emoji"
 require "./lib/Curator"
 require "./lib/photograph"
 require "./lib/artist"
+require "CSV"
 
 class CuratorTest < Minitest::Test
 
@@ -317,6 +318,22 @@ class CuratorTest < Minitest::Test
 
     actual = curator.photographs_taken_by_artists_from("United States")
     assert_instance_of Array, actual
-    assert_equal 3, actual.count 
+    assert_equal 3, actual.count
   end
+
+  def test_it_can_load_photograph_file
+    curator = Curator.new
+
+    curator.load_photographs('./data/photographs.csv')
+    assert_equal 4, curator.photographs.count
+  end
+
+  def test_it_can_laod_artist_CSV_file
+    curator = Curator.new
+
+    curator.load_artists('./data/artists.csv')
+    assert_equal 6, curator.artists.count
+  end
+
+  
 end
