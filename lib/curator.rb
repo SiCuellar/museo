@@ -35,5 +35,24 @@ class Curator
     photograph_with_id.first
   end
 
+  def find_photographs_by_artist(artist_object)
+    artist_id = artist_object.id
+    @photographs.find_all do |photo|
+      photo.artist_id == artist_id
+    end
+  end
+
+  def artists_with_multiple_photographs
+    artist_id_hash = @photographs.group_by do |photo|
+      photo.artist_id
+    end
+
+    artist_id_hash.map do |artist_id, photo_object_array|
+      if photo_object_array.count > 1
+        find_artist_by_id(artist_id)
+      end
+    end.compact
+  end
+
 
 end
