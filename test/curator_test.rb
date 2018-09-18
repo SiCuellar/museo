@@ -345,10 +345,22 @@ class CuratorTest < Minitest::Test
     photo_2 = curator.find_photograph_by_id("4")
 
     assert_equal [photo_1, photo_2], curator.photographs_taken_between(1950..1965)
-
   end
 
+  def test_it_can_return_artist_photographs_by_age
+    curator = Curator.new
+
+    curator.load_artists('./data/artists.csv')
+    curator.load_photographs('./data/photographs.csv')
+
+    diane_arbus = curator.find_artist_by_id("3")
+
+    actual = curator.artists_photographs_by_age(diane_arbus)
+    expected =
+
+    assert_equal expected, actual
 
 
+  end
 
 end

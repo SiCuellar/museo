@@ -100,4 +100,25 @@ class Curator
     wanted_photos.flatten
   end
 
+  def artists_photographs_by_age(artist_object)
+    photo_array = find_photographs_by_artist(artist_object)
+    artist_birth = artist_object.born.to_i
+
+    age = photo_array.map do |photo|
+      photo.year.to_i - artist_birth
+    end
+
+    photo_name = photo_array.map do |photo|
+      photo.name
+    end
+    pairs = age.zip(photo_name)
+    binding.pry
+
+
+
+  end
+
+
+
+
 end
