@@ -55,4 +55,21 @@ class Curator
   end
 
 
+#i really do not like this :0 there has to be a better way!
+
+  def photographs_taken_by_artists_from(country)
+    country_artist_hash = @artists.group_by do |artist|
+      artist.country
+    end
+
+    wanted_photos = []
+    country_artist_hash.each do |country_key, artist_object_array|
+      if country_key == country
+        artist_object_array.map do |artist|
+          wanted_photos << find_photographs_by_artist(artist)
+        end
+      end
+    end
+    wanted_photos.flatten
+  end
 end

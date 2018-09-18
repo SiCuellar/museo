@@ -3,7 +3,7 @@ class Artist
               :name,
               :born,
               :died,
-              :counry
+              :country
 
   def initialize(attributes)
     @id = attributes[:id]
