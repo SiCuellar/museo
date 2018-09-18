@@ -112,7 +112,8 @@ class Curator
       photo.name
     end
     pairs = age.zip(photo_name)
-    binding.pry
+
+    Hash[pairs]
 
 
 
