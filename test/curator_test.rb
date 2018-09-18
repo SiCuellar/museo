@@ -335,5 +335,20 @@ class CuratorTest < Minitest::Test
     assert_equal 6, curator.artists.count
   end
 
-  
+  def test_it_can_return_photographs_tacken_with_year_range
+    curator = Curator.new
+
+    curator.load_artists('./data/artists.csv')
+    curator.load_photographs('./data/photographs.csv')
+
+    photo_1 = curator.find_photograph_by_id("1")
+    photo_2 = curator.find_photograph_by_id("4")
+
+    assert_equal [photo_1, photo_2], curator.photographs_taken_between(1950..1965)
+
+  end
+
+
+
+
 end

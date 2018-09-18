@@ -86,8 +86,18 @@ class Curator
     end
   end
 
+  def photographs_taken_between(range)
+    photo_years = @photographs.group_by do |photo|
+      photo.year.to_i
+    end
 
-
-
+    wanted_photos = []
+    photo_years.each do |year, photo_object_array|
+      if year.between?(range.first, range.last)
+        wanted_photos << photo_object_array
+      end
+    end
+    wanted_photos.flatten
+  end
 
 end
